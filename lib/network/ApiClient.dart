@@ -1,0 +1,6 @@
+const int EXCEPTION_CLIENT_SOCKET = 999;
+const int EXCEPTION_CLIENT_TIMEOUT = 408;
+const int EXCEPTION_CLIENT_UNKNOWN = 500;
+const int EXCEPTION_NOT_FOUND = 404;
+
+class ApiClient {}
