@@ -7,6 +7,7 @@ import 'package:provider/provider.dart';
 
 import 'base/app_localizations.dart';
 import 'environments/development.dart';
+import 'providers/meta_provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
