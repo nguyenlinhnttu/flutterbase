@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_base_source/router.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
-import 'base/AppLocalizations.dart';
+import 'base/app_localizations.dart';
 import 'environments/development.dart';
 
 void main() async {

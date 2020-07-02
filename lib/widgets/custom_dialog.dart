@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_base_source/base/CallbackDialog.dart';
+import 'package:flutter_base_source/widgets/callback_dialog.dart';
 
 import '../utils/constant.dart';
 import '../utils/utils.dart';

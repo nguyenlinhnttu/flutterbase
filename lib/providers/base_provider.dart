@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 
-class LoadingNotifier with ChangeNotifier {
+abstract class BaseProvider with ChangeNotifier {
   bool _isLoading = false;
-  LoadingNotifier(this._isLoading);
 
   isLoading() => _isLoading;
 

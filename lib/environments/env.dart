@@ -1,8 +1,8 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_base_source/base/LoadingNotifier.dart';
-import 'package:flutter_base_source/utils/MySharePref.dart';
+import 'package:flutter_base_source/providers/login_provider.dart';
+import 'package:flutter_base_source/utils/my_share_pref.dart';
 import 'package:provider/provider.dart';
 
+import '../main.dart';
 import '../main.dart';
 
 //https://github.com/ROTGP/flutter_environments
@@ -16,9 +16,11 @@ class Env {
   Env() {
     value = this;
     MySharePref.init().then((value) {
-      runApp(
-        ChangeNotifierProvider<LoadingNotifier>(
-            create: (_) => LoadingNotifier(false), child: MainApp()),
+      MultiProvider(
+        providers: [
+          ChangeNotifierProvider(create: (_) => LoginProvider()),
+        ],
+        child: MainApp(),
       );
     });
   }

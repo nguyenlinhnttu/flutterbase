@@ -1,24 +1,28 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_base_source/utils/Constant.dart';
+import 'package:flutter_base_source/utils/constant.dart';
 
-class SimpleRaisedButton extends StatelessWidget {
+class RoundButton extends StatelessWidget {
   final Color backgroundColor;
   final Text buttonText;
   final Color textColor;
   final Function onPressed;
-
-  SimpleRaisedButton(
-      {this.backgroundColor, this.buttonText, this.textColor, this.onPressed});
+  double width;
+  RoundButton(
+      {this.backgroundColor,
+      this.buttonText,
+      this.textColor,
+      this.onPressed,
+      this.width = 160});
 
   @override
   Widget build(BuildContext context) {
     return Container(
       child: ConstrainedBox(
         constraints: BoxConstraints(
-          minWidth: 160,
+          minWidth: width,
           minHeight: 40,
         ),
-        child: RaisedButton(
+        child: FlatButton(
           shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(SPACE_SMALL)),
           splashColor: this.backgroundColor,

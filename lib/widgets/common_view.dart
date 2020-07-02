@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_base_source/utils/Constant.dart';
-import 'package:flutter_base_source/utils/ImagePath.dart';
+import 'package:flutter_base_source/utils/constant.dart';
+import 'package:flutter_base_source/utils/image_path.dart';
 
 class CommonView {
   static AppBar getAppBar(

@@ -3,16 +3,15 @@ import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_base_source/models/response/CommonResponse.dart';
-import 'package:flutter_base_source/utils/Constant.dart';
-import 'package:flutter_base_source/widgets/CustomDialog.dart';
+import 'package:flutter_base_source/models/response/base_response.dart';
+import 'package:flutter_base_source/utils/constant.dart';
+import 'package:flutter_base_source/widgets/custom_dialog.dart';
 import 'package:http/http.dart';
-import 'package:provider/provider.dart';
 
-import 'AppLocalizations.dart';
-import 'BaseView.dart';
-import 'CallbackDialog.dart';
-import 'LoadingNotifier.dart';
+import 'app_localizations.dart';
+import 'base_view.dart';
+import '../widgets/callback_dialog.dart';
+import '../providers/base_provider.dart';
 
 abstract class BaseWidget<T extends StatefulWidget> extends State<T>
     with AutomaticKeepAliveClientMixin<T>
@@ -22,13 +21,9 @@ abstract class BaseWidget<T extends StatefulWidget> extends State<T>
   GlobalKey<ScaffoldState> globalKeyScaffold = GlobalKey<ScaffoldState>();
   double screenWidth = 0;
   double screenHeight = 0;
-  LoadingNotifier _loadingNotifier;
   AppLocalizations appLocalizations;
   @override
   void didChangeDependencies() {
-    if (_loadingNotifier == null) {
-      _loadingNotifier = Provider.of<LoadingNotifier>(context);
-    }
     if (appLocalizations == null) {
       appLocalizations = AppLocalizations.of(context);
     }
@@ -96,26 +91,6 @@ abstract class BaseWidget<T extends StatefulWidget> extends State<T>
       isShowDialog = false;
       print("dialogDismiss TRUE ");
     });
-  }
-
-  void showLoading() {
-    if (mounted) {
-      if (_loadingNotifier != null) {
-        _loadingNotifier.setLoading(true);
-        print("setState Loading: TRUE ");
-      }
-    }
-  }
-
-  void hideLoading() {
-    if (mounted) {
-      _loadingNotifier.setLoading(false);
-      print("setState Loading: FALSE ");
-    }
-  }
-
-  LoadingNotifier getLoadingState() {
-    return _loadingNotifier;
   }
 
   void hideKeyboard() {
