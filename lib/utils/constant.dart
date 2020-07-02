@@ -19,4 +19,3 @@ const double FONT_SMALLER = 12.0;
 const double FONT_NORMAL = 14.0;
 const double FONT_MEDIUM = 16.0;
 
-const int OTP_TIME = 60;

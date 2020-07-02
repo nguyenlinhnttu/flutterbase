@@ -1,0 +1,5 @@
+{
+  "default_message": "Maybe something error!\nPlease try again!",
+  "time_out": "Time out!\nPlease try again!",
+  "no_internet": "No internet connection!"
+}

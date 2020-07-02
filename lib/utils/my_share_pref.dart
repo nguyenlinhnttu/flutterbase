@@ -9,6 +9,7 @@ class MySharePref {
 
   static final String _token = "token";
   static final String _userInfo = "userInfo";
+  static final String _DARK_MODE = "_DARK_MODE";
 
   static void saveToken(String token) async {
     prefs.setString(_token, token);
@@ -21,5 +22,14 @@ class MySharePref {
   static void removeUserInfo() async {
     prefs.remove(_userInfo);
     prefs.remove(_token);
+  }
+
+  static void saveDarkModeValue(int value) {
+    prefs.setInt(_DARK_MODE, value);
+  }
+
+  static int getDarkModeValue() {
+    int value = prefs.getInt(_DARK_MODE) ?? 1;
+    return value;
   }
 }
