@@ -1,14 +1,10 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_base_source/base/base_state_widget.dart';
 import 'package:flutter_base_source/providers/user_provider.dart';
 import 'package:flutter_base_source/widgets/common_view.dart';
-import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
-
-import 'home.dart';
 
 class Splash extends StatefulWidget {
   @override
@@ -16,24 +12,28 @@ class Splash extends StatefulWidget {
 }
 
 class _SplashState extends BaseStateWidget<Splash> {
+  UserProvider userProvider;
   nextPage() async {
-    Navigator.push(
-      context,
-      PageTransition(
-        type: PageTransitionType.rightToLeft,
-        child: HomeView(),
-      ),
-    );
+//    Navigator.push(
+//      context,
+//      PageTransition(
+//        type: PageTransitionType.rightToLeft,
+//        child: HomeView(),
+//      ),
+//    );
+    userProvider
+        .getUserInfo(123)
+        .then((value) => {if (!value) onApiError(userProvider.apiError)});
   }
 
   @override
   void initState() {
     super.initState();
-    Timer(Duration(milliseconds: 500), () {
-      Provider.of<UserProvider>(context, listen: false).getUserInfo(1);
-    });
-    Provider.of<UserProvider>(context, listen: false).apiError.listen((response) {
-        onApiError(response);
+    userProvider = Provider.of<UserProvider>(context, listen: false);
+    Timer(Duration(milliseconds: 500), () async {
+      userProvider
+          .getUserInfo(1)
+          .then((value) => {if (!value) onApiError(userProvider.apiError)});
     });
   }
 

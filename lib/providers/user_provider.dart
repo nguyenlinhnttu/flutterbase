@@ -4,22 +4,25 @@ import 'package:flutter_base_source/models/user.dart';
 import 'package:flutter_base_source/providers/base_provider.dart';
 
 class UserProvider extends BaseProvider {
-  User user = User();
+  User user;
 
-  void getUserInfo(int userId) async {
+  Future<bool> getUserInfo(int userId) async {
     isLoading = true;
+    User user;
     Response response = await apiClient.callApiGet("/users/$userId");
-    isLoading = false;
     if (response.statusCode == 200) {
       user = CommonResponse<User>.fromJson(response.data).data;
       notifyListeners();
     } else {
-      errorStream = response;
+      apiError = response;
     }
+    isLoading = false;
+    this.user = user;
+    return this.user != null ? true : false;
   }
 
   String getUserName() {
-    return user.userName == null ? "" : user.userName;
+    return (user == null || user.userName == null) ? "" : user.userName;
   }
 
   @override
