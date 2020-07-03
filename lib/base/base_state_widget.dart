@@ -1,27 +1,26 @@
 import 'dart:async';
 import 'dart:convert';
 
+import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_base_source/models/response/base_response.dart';
-import 'package:flutter_base_source/utils/constant.dart';
+import 'package:flutter_base_source/providers/base_provider.dart';
+import 'package:flutter_base_source/providers/user_provider.dart';
+import 'package:flutter_base_source/utils/app_status.dart';
 import 'package:flutter_base_source/widgets/custom_dialog.dart';
-import 'package:http/http.dart';
+import 'package:provider/provider.dart';
 
-import 'app_localizations.dart';
-import 'base_view.dart';
 import '../widgets/callback_dialog.dart';
-import '../providers/base_provider.dart';
+import 'app_localizations.dart';
 
-abstract class BaseWidget<T extends StatefulWidget> extends State<T>
-    with AutomaticKeepAliveClientMixin<T>
-    implements BaseView {
-  bool loading = false;
-  bool isShowDialog = false;
+abstract class BaseStateWidget<T extends StatefulWidget> extends State<T>
+    with AutomaticKeepAliveClientMixin<T> {
   GlobalKey<ScaffoldState> globalKeyScaffold = GlobalKey<ScaffoldState>();
   double screenWidth = 0;
   double screenHeight = 0;
   AppLocalizations appLocalizations;
+
   @override
   void didChangeDependencies() {
     if (appLocalizations == null) {
@@ -43,28 +42,26 @@ abstract class BaseWidget<T extends StatefulWidget> extends State<T>
 
   Widget buildApp(BuildContext context);
 
-  @override
   void onApiError(Response error) {
     String message;
-    switch (error.statusCode) {
-      case EXCEPTION_CLIENT_SOCKET:
-        message = _getString("no_internet");
-        break;
-      case EXCEPTION_CLIENT_TIMEOUT:
-        message = _getString("default_message");
-        break;
-      case EXCEPTION_CLIENT_UNKNOWN:
-      case EXCEPTION_NOT_FOUND:
-        message = _getString("default_message");
-        break;
-      default:
-        CommonResponse response =
-            CommonResponse.fromJson(json.decode(error.body));
-        message = response.message;
-        break;
+    if (error.data is DioError) {
+      DioError dioError = error.data as DioError;
+      switch (dioError.type) {
+        case DioErrorType.CONNECT_TIMEOUT:
+        case DioErrorType.SEND_TIMEOUT:
+        case DioErrorType.RECEIVE_TIMEOUT:
+        case DioErrorType.RESPONSE:
+        case DioErrorType.CANCEL:
+        case DioErrorType.DEFAULT:
+          message = dioError.message;
+          break;
+      }
+    } else {
+      CommonResponse response =
+          CommonResponse.fromJson(json.decode(error.data));
+      message = response.message;
     }
-    hideLoading();
-    if (!isShowDialog && error != null && message != null) {
+    if (!AppStatus.isShowDialog && error != null && message != null) {
       showMessage(message, null);
     }
   }
@@ -77,6 +74,7 @@ abstract class BaseWidget<T extends StatefulWidget> extends State<T>
   //Warning: please check sample ChangePassScreen.
   Future showMessage(String mgs, CallBackDialog callback,
       {bool onWillPop = true}) async {
+    AppStatus.isShowDialog = true;
     await showDialog(
         context: context,
         barrierDismissible: false,
@@ -88,12 +86,12 @@ abstract class BaseWidget<T extends StatefulWidget> extends State<T>
                 callback: callback,
               ),
             )).then((val) {
-      isShowDialog = false;
+      AppStatus.isShowDialog = false;
       print("dialogDismiss TRUE ");
     });
   }
 
   void hideKeyboard() {
-    if (mounted) FocusScope.of(context).requestFocus(new FocusNode());
+    if (mounted) FocusScope.of(context).requestFocus(FocusNode());
   }
 }

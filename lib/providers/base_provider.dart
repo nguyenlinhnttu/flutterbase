@@ -1,13 +1,23 @@
+import 'dart:async';
+
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_base_source/network/api_client.dart';
 
 abstract class BaseProvider with ChangeNotifier {
-  bool _isLoading = false;
   ApiClient apiClient = ApiClient();
-  isLoading() => _isLoading;
+  bool _isLoading = false;
+  StreamController<Response> _errorStream = StreamController<Response>.broadcast();
+  Stream<Response> get apiError => _errorStream.stream;
 
-  setLoading(bool isLoading) async {
-    _isLoading = isLoading;
+  bool get isLoading => _isLoading;
+
+  set isLoading(bool value) {
+    _isLoading = value;
     notifyListeners();
+  }
+
+  set errorStream(Response value) {
+    _errorStream.add(value);
   }
 }

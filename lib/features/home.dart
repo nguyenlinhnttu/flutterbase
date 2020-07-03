@@ -1,15 +1,13 @@
-import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_base_source/features/splash.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_base_source/features/MyTab.dart';
 
 
-class MainActivity extends StatefulWidget{
+class HomeView extends StatefulWidget{
   _HomeState createState() => _HomeState();
 }
 
-class _HomeState extends State<MainActivity> {
+class _HomeState extends State<HomeView> {
   PageController _pageController;
   int _page = 0;
 
@@ -21,10 +19,10 @@ class _HomeState extends State<MainActivity> {
         controller: _pageController,
         onPageChanged: onPageChanged,
         children: <Widget>[
-          Splash(),
-          Splash(),
-          Splash(),
-          Splash(),
+          MyTab(),
+          MyTab(),
+          MyTab(),
+          MyTab(),
         ],
       ),
 

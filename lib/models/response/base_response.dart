@@ -1,7 +1,7 @@
 import '../user.dart';
 
 class CommonResponse<T> {
-  String code;
+  int code;
   String message;
   T data;
 

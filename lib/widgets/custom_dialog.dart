@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_base_source/utils/app_status.dart';
 import 'package:flutter_base_source/widgets/callback_dialog.dart';
 
 import '../utils/constant.dart';
@@ -31,7 +32,6 @@ class _CustomDialogState extends State<CustomDialog>
   @override
   void initState() {
     super.initState();
-
     controller =
         AnimationController(vsync: this, duration: Duration(milliseconds: 100));
     scaleAnimation =
@@ -104,5 +104,10 @@ class _CustomDialogState extends State<CustomDialog>
             )),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
   }
 }
