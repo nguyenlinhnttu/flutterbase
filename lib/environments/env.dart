@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_base_source/providers/app_provider.dart';
-import 'package:flutter_base_source/providers/login_provider.dart';
 import 'package:flutter_base_source/providers/user_provider.dart';
 import 'package:flutter_base_source/utils/my_share_pref.dart';
 import 'package:provider/provider.dart';
@@ -22,7 +21,6 @@ class Env {
         providers: [
           ChangeNotifierProvider(create: (_) => AppProvider()),
           ChangeNotifierProvider(create: (_) => UserProvider()),
-          ChangeNotifierProvider(create: (_) => LoginProvider()),
         ],
         child: MainApp(),
       ));
