@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_base_source/base/base_state_widget.dart';
 import 'package:flutter_base_source/providers/user_provider.dart';
+import 'package:flutter_base_source/widgets/common_view.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
 
@@ -27,7 +28,6 @@ class _SplashState extends BaseStateWidget<Splash> {
 
   @override
   void initState() {
-    SystemChrome.setEnabledSystemUIOverlays([]);
     super.initState();
     Timer(Duration(milliseconds: 500), () {
       Provider.of<UserProvider>(context, listen: false).getUserInfo(1);
@@ -39,7 +39,6 @@ class _SplashState extends BaseStateWidget<Splash> {
 
   @override
   void dispose() {
-    SystemChrome.setEnabledSystemUIOverlays(SystemUiOverlay.values);
     super.dispose();
   }
 
@@ -95,7 +94,7 @@ class _SplashState extends BaseStateWidget<Splash> {
               ),
             ),
             userProvider.isLoading
-                ? Center(child: CircularProgressIndicator())
+                ? CommonView.loadingView(userProvider.isLoading)
                 : Container(),
           ]),
         ),
