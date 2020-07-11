@@ -1,13 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_base_source/base/base_state_widget.dart';
-import 'package:flutter_base_source/providers/user_provider.dart';
-import 'package:page_transition/page_transition.dart';
-import 'package:provider/provider.dart';
-
-import 'home.dart';
 
 class MyTab extends StatefulWidget {
   @override
@@ -15,7 +9,6 @@ class MyTab extends StatefulWidget {
 }
 
 class _State extends BaseStateWidget<MyTab> {
-
   @override
   void initState() {
     super.initState();

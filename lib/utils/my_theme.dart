@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
-class MyTheme{
+class MyTheme {
   static Color lightPrimary = Colors.white;
   static Color darkPrimary = Colors.black;
   static Color lightAccent = Colors.lightBlue;
   static Color darkAccent = Colors.lightBlue;
-  static Color lightBG = Color(0xFFFAFAFA);
-  static Color darkBG = Color(0xFF2C2C2C);
+  static Color lightBG = Colors.white;
+  static Color darkBG = Colors.black;
 
   static ThemeData lightTheme = ThemeData(
     backgroundColor: lightBG,

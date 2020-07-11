@@ -1,7 +1,7 @@
 import '../user.dart';
 
 class CommonResponse<T> {
-  int code;
+  String code;
   String message;
   T data;
 
@@ -14,9 +14,11 @@ class CommonResponse<T> {
     if (json.containsKey("message")) {
       message = json['message'];
     }
-    data = json['data'] != null && json['data'].toString().isNotEmpty
-        ? converts(json['data'])
-        : null;
+    if (json.containsKey("data")) {
+      data = json['data'] != null && json['data'].toString().isNotEmpty
+          ? converts(json['data'])
+          : null;
+    }
   }
 
   T converts(dynamic response) {

@@ -13,7 +13,8 @@ class HexColor extends Color {
 }
 
 class AppColors {
-  static final Color primary = HexColor('6caddf');
+  static final Color primary = HexColor("#f95555");
+  static final Color primarySecond = HexColor("#f78282");
   static final Color blue = HexColor('2979ff');
   static final Color red = HexColor('fc625d');
   static final Color rose = HexColor('FBEEEE');

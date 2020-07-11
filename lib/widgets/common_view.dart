@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_base_source/utils/constant.dart';
 import 'package:flutter_base_source/utils/image_path.dart';
+import 'package:flutter_base_source/utils/utils.dart';
 import 'package:loading/indicator/line_scale_pulse_out_indicator.dart';
 import 'package:loading/loading.dart';
 
@@ -27,6 +28,7 @@ class CommonView {
         child: IconButton(
           icon: ImagePath.icArrow,
           onPressed: () {
+            FocusScope.of(context).unfocus();
             Navigator.pop(context);
           },
         ),
@@ -72,7 +74,7 @@ class CommonView {
       color: Colors.black.withAlpha(5),
       child: Center(
         child: Loading(
-            indicator: LineScalePulseOutIndicator(), color: Colors.white),
+            indicator: LineScalePulseOutIndicator(), color: AppColors.primary),
       ),
     );
   }

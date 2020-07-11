@@ -1,3 +1,6 @@
+import 'dart:convert';
+
+import 'package:flutter_base_source/models/user.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class MySharePref {
@@ -17,6 +20,12 @@ class MySharePref {
 
   static Future<String> getToken() async {
     return prefs.getString(_token) ?? '';
+  }
+
+  static void saveUserInfo(User user) async {
+    String data = json.encode(user);
+    print(data.toString());
+    prefs.setString(_userInfo, data);
   }
 
   static void removeUserInfo() async {

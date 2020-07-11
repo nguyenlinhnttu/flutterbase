@@ -1,38 +1,37 @@
 class User {
   String id;
-  String email;
-  String userName;
-  String phone;
+  String account;
+  String user_name;
+  String display_name;
+  String avatar;
   String token;
 
   User({
     this.id,
-    this.email,
-    this.userName,
-    this.phone,
+    this.account,
+    this.user_name,
+    this.display_name,
+    this.avatar,
     this.token,
   });
 
   User.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    email = json['email'];
-    userName = json['userName'];
-    phone = json['phone'];
+    id = json['_id'];
+    account = json['account'];
+    user_name = json['user_name'];
+    display_name = json['display_name'];
+    avatar = json['avatar'];
     token = json['token'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['email'] = this.email;
-    data['userName'] = this.userName;
-    data['phone'] = this.phone;
+    data['_id'] = this.id;
+    data['account'] = this.account;
+    data['user_name'] = this.user_name;
+    data['display_name'] = this.display_name;
+    data['avatar'] = this.avatar;
     data['token'] = this.token;
     return data;
-  }
-
-  @override
-  String toString() {
-    return 'User{id: $id, email: $email, userName: $userName, phone: $phone, token: $token}';
   }
 }

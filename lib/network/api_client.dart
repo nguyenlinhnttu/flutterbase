@@ -25,6 +25,16 @@ class ApiClient {
             (X509Certificate cert, String host, int port) => true;
         return client;
       };
+      (_dio.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate =
+          (client) {
+        // config the http client
+        client.findProxy = (uri) {
+          //proxy all request to localhost:8888
+          return "PROXY localhost:3001";
+        };
+        // you can also create a new HttpClient to dio
+        // return new HttpClient();
+      };
     }
   }
 
@@ -47,6 +57,33 @@ class ApiClient {
     Response response;
     try {
       response = await _dio.get(apiPath, queryParameters: queryParameters);
+      return response;
+    } on DioError catch (e) {
+      // The request was made and the server responded with a status code
+      // that falls out of the range of 2xx and is also not 304.
+      if (e.response != null) {
+        print(e.response.data);
+        print(e.response.headers);
+        print(e.response.request);
+      } else {
+        // Something happened in setting up or sending the request that triggered an Error
+        print(e.request);
+        print(e.message);
+      }
+      response = Response();
+      response.data = e;
+      response.statusCode = e.response.statusCode;
+      response.statusMessage = e.response.statusMessage;
+
+      return response;
+    }
+  }
+
+  Future<Response> callApiPost(String apiPath, dynamic data) async {
+    print("Request:" + data.toString());
+    Response response;
+    try {
+      response = await _dio.post(apiPath, data: data);
       return response;
     } on DioError catch (e) {
       // The request was made and the server responded with a status code
