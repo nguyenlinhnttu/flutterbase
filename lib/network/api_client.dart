@@ -99,9 +99,7 @@ class ApiClient {
       }
       response = Response();
       response.data = e;
-      response.statusCode = e.response.statusCode;
-      response.statusMessage = e.response.statusMessage;
-
+      print(e);
       return response;
     }
   }

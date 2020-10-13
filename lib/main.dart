@@ -7,7 +7,6 @@ import 'package:provider/provider.dart';
 
 import 'base/app_localizations.dart';
 import 'environments/development.dart';
-
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations(
@@ -57,7 +56,7 @@ class MainApp extends StatelessWidget {
           theme: appProvider.theme,
           debugShowCheckedModeBanner: false,
           initialRoute: RoutePaths.Splash,
-          onGenerateRoute: Router.generateRoute);
+          onGenerateRoute: MyRouter.generateRoute);
         });
   }
 }

@@ -21,8 +21,6 @@ class Env {
       runApp(MultiProvider(
         providers: [
           ChangeNotifierProvider(create: (_) => AppProvider()),
-          ChangeNotifierProvider(create: (_) => UserProvider()),
-          ChangeNotifierProvider(create: (_) => SignInProvider()),
         ],
         child: MainApp(),
       ));

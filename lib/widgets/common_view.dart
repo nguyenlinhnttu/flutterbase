@@ -3,8 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_base_source/utils/constant.dart';
 import 'package:flutter_base_source/utils/image_path.dart';
 import 'package:flutter_base_source/utils/utils.dart';
-import 'package:loading/indicator/line_scale_pulse_out_indicator.dart';
-import 'package:loading/loading.dart';
+import 'package:loading_animations/loading_animations.dart';
 
 class CommonView {
   static AppBar getAppBar(
@@ -69,12 +68,16 @@ class CommonView {
   }
 
   static Widget loadingView(bool isLoading) {
+    print("loadingView" + isLoading.toString());
     if (!isLoading) return Container();
     return Container(
       color: Colors.black.withAlpha(5),
       child: Center(
-        child: Loading(
-            indicator: LineScalePulseOutIndicator(), color: AppColors.primary),
+        child: LoadingBouncingGrid.square(
+          size: 40,
+          inverted: true,
+          backgroundColor: AppColors.primarySecond,
+        ),
       ),
     );
   }

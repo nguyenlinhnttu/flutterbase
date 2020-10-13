@@ -1,9 +1,8 @@
-
 import 'package:flutter/material.dart';
-import 'package:flutter_base_source/features/MyTab.dart';
 
+import 'my_tab.dart';
 
-class HomeView extends StatefulWidget{
+class HomeView extends StatefulWidget {
   _HomeState createState() => _HomeState();
 }
 
@@ -25,7 +24,6 @@ class _HomeState extends State<HomeView> {
           MyTab(),
         ],
       ),
-
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: Theme.of(context).primaryColor,
         selectedItemColor: Theme.of(context).accentColor,
@@ -39,21 +37,18 @@ class _HomeState extends State<HomeView> {
             ),
             title: SizedBox(),
           ),
-
           BottomNavigationBarItem(
             icon: Icon(
               Icons.category,
             ),
             title: SizedBox(),
           ),
-
           BottomNavigationBarItem(
             icon: Icon(
               Icons.dashboard,
             ),
             title: SizedBox(),
           ),
-
           BottomNavigationBarItem(
             icon: Icon(
               Icons.settings,
@@ -64,7 +59,6 @@ class _HomeState extends State<HomeView> {
         onTap: navigationTapped,
         currentIndex: _page,
       ),
-
     );
   }
 

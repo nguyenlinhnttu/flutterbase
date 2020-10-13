@@ -13,7 +13,6 @@ class SplashView extends StatefulWidget {
 }
 
 class _SplashViewState extends BaseStateWidget<SplashView> {
-  UserProvider userProvider;
 
   nextPage() async {
     Navigator.pushReplacementNamed(context, RoutePaths.SignIn);
@@ -22,11 +21,7 @@ class _SplashViewState extends BaseStateWidget<SplashView> {
   @override
   void initState() {
     super.initState();
-    userProvider = Provider.of<UserProvider>(context, listen: false);
     Timer(Duration(milliseconds: 500), () async {
-//      userProvider.getUserInfo(1).then((value) => {
-//            if (!value) {onApiError(userProvider.apiError)} else {nextPage()}
-//          });
       nextPage();
     });
   }
@@ -38,32 +33,26 @@ class _SplashViewState extends BaseStateWidget<SplashView> {
 
   @override
   Widget buildApp(BuildContext context) {
-    return Consumer<UserProvider>(builder:
-        (BuildContext context, UserProvider userProvider, Widget child) {
-      return Scaffold(
-        body: WillPopScope(
-          onWillPop: () => Future.value(false),
-          child: Stack(fit: StackFit.expand, children: <Widget>[
-            Container(
-              padding: EdgeInsets.all(40),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Center(
-                    child: Image.asset(
-                      "assets/icons/ic_splash.png",
-                    ),
+    return Scaffold(
+      body: WillPopScope(
+        onWillPop: () => Future.value(false),
+        child: Stack(fit: StackFit.expand, children: <Widget>[
+          Container(
+            padding: EdgeInsets.all(40),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Center(
+                  child: Image.asset(
+                    "assets/icons/ic_splash.png",
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
-            userProvider.isLoading
-                ? CommonView.loadingView(userProvider.isLoading)
-                : Container(),
-          ]),
-        ),
-      );
-    });
+          )
+        ]),
+      ),
+    );
   }
 }

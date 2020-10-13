@@ -16,10 +16,9 @@ class RoutePaths {
   static const String ForgotPass = "ForgotPass";
   static const String ChangePass = "ChangePass";
   static const String Home = "Home";
-  static const String Profile = "Profile";
 }
 
-class Router {
+class MyRouter {
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
       case RoutePaths.Splash:
